@@ -1,0 +1,7 @@
+
+=
+java:S2189!""Add an end condition to this loop.(˜ïˆžÿÿÿÿÿ
+S	java:S106""9Replace this use of System.out or System.err by a logger.(Íú£«ÿÿÿÿÿ
+\
+java:S2142+"FEither re-interrupt this method or rethrow the "InterruptedException".(ä ¹€
+Q	java:S1253"<This block of commented-out lines of code should be removed.(çÆÃ³

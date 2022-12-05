@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.6.4</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.kafka.schema</groupId>
+	<artifactId>kafka-schema-demo</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>kafka-schema-demo</name>
+	<description>Demo project for Spring Boot</description>
+	<properties>
+		<avro.version>1.9.1</avro.version>
+		<confluent.version>6.0.0</confluent.version>
+		<java.version>1.8</java.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>kafka-streams</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<artifactId>avro</artifactId>
+			<groupId>org.apache.avro</groupId>
+			<version>${avro.version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>avro-maven-plugin</artifactId>
+			<groupId>org.apache.avro</groupId>
+			<version>${avro.version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>kafka-avro-serializer</artifactId>
+			<groupId>io.confluent</groupId>
+			<version>${confluent.version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>kafka-streams-avro-serde</artifactId>
+			<groupId>io.confluent</groupId>
+			<version>${confluent.version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>kafka-schema-registry-client</artifactId>
+			<groupId>io.confluent</groupId>
+			<version>${confluent.version}</version>
+		</dependency>
+	</dependencies>
+
+	<repositories>
+		<repository>
+			<id>confluent</id>
+			<url>https://packages.confluent.io/maven/</url>
+		</repository>
+	</repositories>
+
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.7.0</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+
+
+			<!--for specific record-->
+			<plugin>
+				<artifactId>avro-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<configuration>
+							<outputDirectory>${project.basedir}/src/main/java</outputDirectory>
+							<sourceDirectory>src/main/resources/avro</sourceDirectory>
+							<stringType>String</stringType>
+						</configuration>
+						<goals>
+							<goal>schema</goal>
+						</goals>
+						<phase>generate-sources</phase>
+					</execution>
+				</executions>
+				<groupId>org.apache.avro</groupId>
+				<version>${avro.version}</version>
+			</plugin>
+			<!--force discovery of generated classes-->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>${project.build.directory}/generated-sources/avro</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

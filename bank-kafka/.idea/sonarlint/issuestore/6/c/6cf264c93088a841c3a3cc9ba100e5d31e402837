@@ -1,0 +1,14 @@
+
+e
+java:S2095B"JUse try-with-resources or close this "KafkaStreams" in a "finally" clause.(×Üß“úÿÿÿÿ
+[
+java:S11924"FDefine a constant instead of duplicating this literal "count" 3 times.(‡ÕÃ
+^
+java:S11925"HDefine a constant instead of duplicating this literal "balance" 3 times.(î»–Ğ
+B
+java:S1612G",Replace this lambda with a method reference.(™œÀ
+O
+java:S1874%"4Remove this use of "EXACTLY_ONCE"; it is deprecated.(¢Ùİùÿÿÿÿ
+R
+java:S1874G"<Remove this use of "localThreadsMetadata"; it is deprecated.(™œÀ
+N	java:S106G"9Replace this use of System.out or System.err by a logger.(™œÀ
